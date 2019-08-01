@@ -64,4 +64,17 @@ public class CustomerOrdersWsImpl implements CustomerOrdersPortType {
 
         return response;
     }
+
+    @Override
+    public DeleteOrdersResponse deleteOrders(DeleteOrdersRequest request) {
+        BigInteger customerId = request.getCustomerId();
+        List<Order> orders = customerOrders.get(customerId);
+        for(Order order : orders){
+            orders.remove(order);
+        }
+
+        DeleteOrdersResponse response = new DeleteOrdersResponse();
+        response.setResult(true);
+        return response;
+    }
 }
